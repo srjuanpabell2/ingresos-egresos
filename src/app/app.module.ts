@@ -26,6 +26,11 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 //Enviroment
 import { environment } from 'src/environments/environment';
 
+//ngrx
+import { StoreModule } from '@ngrx/store';
+import { appReducers } from './app.reducer';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,7 +50,12 @@ import { environment } from 'src/environments/environment';
     FormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    StoreModule.forRoot(appReducers),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
+      logOnly: environment.production
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent]
